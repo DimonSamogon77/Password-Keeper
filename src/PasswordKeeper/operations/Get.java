@@ -13,7 +13,7 @@ public class Get {
             String s = Frame.choose();
             if (s != null) {
                 int i = Integer.parseInt(s);
-                PreparedStatement preparedStatement = Connect.connection().prepareStatement("select * from passwords where id = ?");
+                PreparedStatement preparedStatement = Connect.getInstance().prepareStatement("select * from passwords where id = ?");
                 preparedStatement.setInt(1, i);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 String str = "";

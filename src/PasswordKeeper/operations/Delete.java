@@ -14,7 +14,7 @@ public class Delete {
             String s = Frame.choose();
             if (s != null) {
                 int i = Integer.parseInt(s);
-                PreparedStatement preparedStatement = Connect.connection().prepareStatement("delete from passwords where id = ?");
+                PreparedStatement preparedStatement = Connect.getInstance().prepareStatement("delete from passwords where id = ?");
                 preparedStatement.setInt(1, i);
                 preparedStatement.executeUpdate();
             } else {

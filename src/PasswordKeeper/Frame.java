@@ -1,20 +1,32 @@
 package PasswordKeeper;
 
-import PasswordKeeper.operations.Add;
-import PasswordKeeper.operations.Delete;
-import PasswordKeeper.operations.Get;
-import PasswordKeeper.operations.Update;
+import PasswordKeeper.operations.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Frame {
-    private static final JFrame jFrame = getFrame();
-    private static final JPanel jPanel = new JPanel();
+    private static JFrame jFrame;
+    private static JPanel jPanel;
 
 
     public static void execute() {
+        while(true) {
+            try {
+                Connect.getInstance();
+                break;
+            }catch (SQLException e){
+                int res = JOptionPane.showConfirmDialog(null, "Incorrect data", "Error", JOptionPane.OK_CANCEL_OPTION);
+                if(res == -1 || res == 2){
+                    System.exit(0);
+                }
+                e.printStackTrace();
+            }
+        }
+        jFrame = getFrame();
+        jPanel = new JPanel();
         jFrame.add(jPanel);
         buttons();
         jPanel.revalidate();
@@ -113,5 +125,24 @@ public class Frame {
         } else{
             errorMessage();
         }
+    }
+
+    public static String[] loginMessage(){
+        JPanel panel = new JPanel(new BorderLayout(5, 5));
+
+        JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
+        label.add(new JLabel("Login", SwingConstants.RIGHT));
+        label.add(new JLabel("Password", SwingConstants.RIGHT));
+        panel.add(label, BorderLayout.WEST);
+
+        JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
+        JTextField username = new JTextField();
+        controls.add(username);
+        JPasswordField password = new JPasswordField();
+        controls.add(password);
+        panel.add(controls, BorderLayout.CENTER);
+
+        JOptionPane.showConfirmDialog(null, panel, "Login", JOptionPane.OK_CANCEL_OPTION);
+        return new String[]{username.getText(), new String(password.getPassword())};
     }
 }

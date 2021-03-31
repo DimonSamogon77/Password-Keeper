@@ -17,7 +17,6 @@ public class HelpMethods {
             while (resultSet.next()) {
                 list.add(resultSet.getString("id") + " - " + resultSet.getString("site"));
             }
-            return list;
         }catch (SQLException e){
             e.printStackTrace();
         }

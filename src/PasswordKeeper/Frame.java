@@ -64,7 +64,6 @@ public class Frame {
     }
 
     public static JFrame getFrame() {
-        ImageIcon icon = new ImageIcon("C:\\Users\\baran\\Desktop\\icon2.png");
         JFrame jFrame = new JFrame();
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,13 +71,9 @@ public class Frame {
         Dimension dimension = toolkit.getScreenSize();
         jFrame.setBounds(dimension.width / 2 - 400, dimension.height / 2 - 100, 800, 200);
         jFrame.setTitle("PasswordKeeper");
-        jFrame.setIconImage(icon.getImage());
         return jFrame;
     }
 
-    public static String getSite() {
-        return JOptionPane.showInputDialog(jFrame, "Enter site", "Site", JOptionPane.QUESTION_MESSAGE);
-    }
 
     public static String getPassword() {
         return JOptionPane.showInputDialog(jFrame, "Enter Password", "Password", JOptionPane.QUESTION_MESSAGE);
@@ -96,12 +91,11 @@ public class Frame {
             return res[0];
         } else{
             errorMessage();
-            return null;
+            return "-1";
         }
     }
 
     public static void showInfo(String s) {
-
         JOptionPane.showMessageDialog(jFrame, s, "Your password", JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -144,5 +138,26 @@ public class Frame {
 
         JOptionPane.showConfirmDialog(null, panel, "Login", JOptionPane.OK_CANCEL_OPTION);
         return new String[]{username.getText(), new String(password.getPassword())};
+    }
+
+    public static String[] addSite(){
+        JPanel panel = new JPanel(new BorderLayout(5, 5));
+
+        JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
+        label.add(new JLabel("Site name", SwingConstants.RIGHT));
+        label.add(new JLabel("Password", SwingConstants.RIGHT));
+        panel.add(label, BorderLayout.WEST);
+
+        JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
+        JTextField site = new JTextField();
+        site.setDocument(new LimitedDocument(20));
+        controls.add(site);
+        JPasswordField password = new JPasswordField();
+        password.setDocument(new LimitedDocument(30));
+        controls.add(password);
+        panel.add(controls, BorderLayout.CENTER);
+
+        JOptionPane.showConfirmDialog(null, panel, "Adding", JOptionPane.OK_CANCEL_OPTION);
+        return new String[]{site.getText(), new String(password.getPassword())};
     }
 }

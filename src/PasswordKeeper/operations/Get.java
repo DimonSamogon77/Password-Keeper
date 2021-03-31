@@ -11,20 +11,17 @@ public class Get {
     public static void get() {
         try {
             String s = Frame.choose();
-            if (s != null) {
-                int i = Integer.parseInt(s);
-                PreparedStatement preparedStatement = Connect.getInstance().prepareStatement("select * from passwords where id = ?");
-                preparedStatement.setInt(1, i);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                String str = "";
-                while(resultSet.next()){
-                    str = resultSet.getString("site") + " - " + resultSet.getString("password");
-                }
-                Frame.showInfo(str);
-            } else {
-                Frame.errorMessage();
+            int i = Integer.parseInt(Frame.choose());
+            PreparedStatement preparedStatement = Connect.getInstance().prepareStatement("select * from passwords where id = ?");
+            preparedStatement.setInt(1, i);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            String str = "";
+            while (resultSet.next()) {
+                str = resultSet.getString("site") + " - " + resultSet.getString("password");
             }
-        } catch (SQLException e) {
+            Frame.showInfo(str);
+        } catch (SQLException | NullPointerException e) {
+            Frame.errorMessage();
             e.printStackTrace();
         }
     }

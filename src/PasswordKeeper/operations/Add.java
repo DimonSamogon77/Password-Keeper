@@ -2,15 +2,15 @@ package PasswordKeeper.operations;
 
 import PasswordKeeper.Frame;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Add {
 
     public static void add(){
-        String site = Frame.getSite();
-        String password = Frame.getPassword();
+        String[] data = Frame.addSite();
+        String site = data[0];
+        String password = data[1];
         try {
             PreparedStatement statement = Connect.getInstance().prepareStatement("insert into passwords (site, password) values(?, ?)");
             statement.setString(1, site);

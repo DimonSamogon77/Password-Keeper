@@ -11,16 +11,11 @@ public class Delete {
 
     public static void delete() {
         try {
-            String s = Frame.choose();
-            if (s != null) {
-                int i = Integer.parseInt(s);
-                PreparedStatement preparedStatement = Connect.getInstance().prepareStatement("delete from passwords where id = ?");
-                preparedStatement.setInt(1, i);
-                preparedStatement.executeUpdate();
-            } else {
-                Frame.errorMessage();
-            }
-        } catch (SQLException e) {
+            int i = Integer.parseInt(Frame.choose());
+            PreparedStatement preparedStatement = Connect.getInstance().prepareStatement("delete from passwords where id = ?");
+            preparedStatement.setInt(1, i);
+            preparedStatement.executeUpdate();
+        } catch (SQLException | NumberFormatException e) {
             e.printStackTrace();
         }
         HelpMethods.updateId();

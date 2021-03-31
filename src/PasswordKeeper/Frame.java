@@ -91,7 +91,7 @@ public class Frame {
             return res[0];
         } else{
             errorMessage();
-            return "-1";
+            return null;
         }
     }
 

@@ -1,4 +1,6 @@
-package PasswordKeeper;
+package PasswordKeeper.operations;
+
+import PasswordKeeper.ConsoleHelper;
 
 import java.sql.*;
 

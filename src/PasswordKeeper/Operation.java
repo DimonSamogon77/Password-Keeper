@@ -1,5 +1,10 @@
 package PasswordKeeper;
 
+import PasswordKeeper.operations.Add;
+import PasswordKeeper.operations.Delete;
+import PasswordKeeper.operations.Get;
+import PasswordKeeper.operations.Update;
+
 public class Operation {
     public static void execute(){
         boolean k = true;

@@ -1,4 +1,6 @@
-package PasswordKeeper;
+package PasswordKeeper.operations;
+
+import PasswordKeeper.Frame;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -6,10 +8,8 @@ import java.sql.SQLException;
 public class Add {
 
     public static void add(){
-        ConsoleHelper.writeMessage("Введите сайт:");
-        String site = ConsoleHelper.readMessage();
-        ConsoleHelper.writeMessage("Введите пароль:");
-        String password = ConsoleHelper.readMessage();
+        String site = Frame.getSite();
+        String password = Frame.getPassword();
         try {
             PreparedStatement statement = Connect.connection().prepareStatement("insert into passwords (site, password) values(?, ?)");
             statement.setString(1, site);
